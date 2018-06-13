@@ -1,19 +1,24 @@
 //variables/functions
+var currentBalance = 0;
 function BankAccount (name, balance) {
   this.name = name;
   this.balance = balance;
 }
-BankAccount.prototype.deposit = function (balance, deposit) {
-  balance += deposit;
-  return balance;
+function register (initialDeposit) {
+  if(currentBalance === 0) {
+    currentBalance = initialDeposit;
+  }
 }
-BankAccount.prototype.withdraw = function (balance, withdraw) {
-  balance -= withdraw;
-  return balance;
+BankAccount.prototype.calculator = function (initialDeposit, deposit, withdraw) {
+  if (!isNaN(deposit)) {
+    this.balance += deposit;
+  }
+  if (!isNaN(withdraw)) {
+    this.balance -= withdraw;
+  }
+    return this.balance
 }
-function calculator (balance, deposit, withdraw) {
-  
-}
+
 $(document).ready(function(){
   $("form#bank-form").submit(function(event){
     event.preventDefault();
@@ -22,8 +27,14 @@ $(document).ready(function(){
     var inputtedDeposit = parseFloat($("input#deposit").val());
     var inputtedWithdraw = parseFloat($("input#withdraw").val());
 
-    var newBankAccount = new BankAccount (inputtedName, inputtedInitialDeposit);
+    register(inputtedInitialDeposit);
 
-    $("#current-balance").text(newBankAccount.balance.toFixed(2));
+    var newBankAccount = new BankAccount (inputtedName, currentBalance);
+    currentBalance = newBankAccount.calculator(inputtedInitialDeposit, inputtedDeposit, inputtedWithdraw);
+
+    $("#current-balance").text("$" + currentBalance.toFixed(2));
+    $("input#deposit").val("");
+    $("input#withdraw").val("");
+    $("input#initial-deposit").val("");
   });
 });
