@@ -1,0 +1,23 @@
+.panel {
+  border-width: 2px;
+}
+.form-control {
+  width: 200px;
+}
+.balance-box {
+  text-align: center;
+}
+.well {
+  width:200px;
+  text-align: center;
+}
+h1 {
+  text-align: center;
+}
+button {
+  width:200px;
+  height: 75px;
+}
+#update-button{
+  font-size: 30px;
+}
